@@ -12,9 +12,9 @@
 
 library(Rsamtools)
 
-buncha.bams <- c( Sys.glob("../trimmed_sequences/*BASELINE*mkd.bam") , Sys.glob("../trimmed_sequences/*RELAPSE*.mkd.bam") )
+buncha.bams <- Sys.glob("DIRECTORY_WITH_BAM_FILES/*.bam")
 
-load("/cluster/home/sulhaq/hybrid_capture_regions/hybrid.capture.regions.GRange.RData")
+load("GRANGE_CONTAINING_REGONS_OF_INTEREST.RData")
 
 for(eachBam in buncha.bams) {
   bamFile <- BamFile(eachBam)
@@ -40,5 +40,5 @@ for(eachBam in buncha.bams) {
     fragout <- c(fragout, sl.ratio)
   }
   names(fragout) <- names(bamo)
-  save(fragout, file=paste0("../sami_fragmento_analyzo/", eachBam, "_fragments.RData"))
+  save(fragout, file=paste0("OUTPUT_DIRECTORY/", eachBam, "_fragments.RData"))
 }
